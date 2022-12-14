@@ -6,7 +6,7 @@ import { ButtonDelete, List, ListItem } from './ContactList.styled';
 
 export const ContactList = () => {
   const dispatch = useDispatch();
-  const { items, isLoading, error } = useSelector(getContacts);
+  const { items } = useSelector(getContacts);
 
   const filter = useSelector(getStatusFilter);
 
