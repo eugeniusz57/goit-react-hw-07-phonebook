@@ -6,13 +6,15 @@ import {
   ButtonSubmit,
 } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/myContactSlice';
 import { getContacts } from 'redux/selectors';
+import { addContact } from 'redux/operations';
+
 export function ContactForm() {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
-  const contactItems = useSelector(getContacts);
+  const [phone, setPhone] = useState('');
+  const { items } = useSelector(getContacts);
   const dispatch = useDispatch();
+  console.log('contactItems', items);
 
   const hendleNameChange = e => {
     const { name, value } = e.target;
@@ -20,28 +22,28 @@ export function ContactForm() {
       setName(value);
       return;
     }
-    if (name === 'number') {
-      setNumber(value);
+    if (name === 'phone') {
+      setPhone(value);
     }
   };
 
   const clear = () => {
     setName('');
-    setNumber('');
+    setPhone('');
   };
 
   const hendlOnSubmit = e => {
     e.preventDefault();
     if (
-      contactItems.find(
+      items.find(
         contact =>
           contact.name.toLowerCase() === name.toLowerCase() ||
-          contact.number === number
+          contact.phone === phone
       )
     ) {
-      return alert(`${name} or number: ${number} is alredy in contact`);
+      return alert(`${name} or phone: ${phone} is alredy in contact`);
     }
-    dispatch(addContact({ name, number }));
+    dispatch(addContact({ name, phone }));
     clear();
   };
 
@@ -58,15 +60,15 @@ export function ContactForm() {
         value={name}
         onChange={hendleNameChange}
       />
-      <Label htmlFor="idLabelNumber">Number</Label>
+      <Label htmlFor="idLabelNumber">Phone</Label>
       <Input
         id="idLabelNumber"
         type="tel"
-        name="number"
+        name="phone"
         pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         required
-        value={number}
+        value={phone}
         onChange={hendleNameChange}
       />
 

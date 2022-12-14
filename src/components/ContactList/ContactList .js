@@ -1,35 +1,35 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { deleteContact } from 'redux/operations';
 import { getContacts, getStatusFilter } from 'redux/selectors';
-import { deleteContact } from 'redux/myContactSlice';
+
 import { ButtonDelete, List, ListItem } from './ContactList.styled';
 
 export const ContactList = () => {
   const dispatch = useDispatch();
-  const contactsItems = useSelector(getContacts);
-  console.log('contactsItems+', contactsItems);
+  const { items, isLoading, error } = useSelector(getContacts);
+
   const filter = useSelector(getStatusFilter);
-  console.log('filter---', filter);
+
   const findContact = () => {
     const toLowerFilter = filter.toLowerCase().trim();
     if (!toLowerFilter) {
-      return contactsItems;
+      return items;
     }
 
-    return contactsItems.filter(item =>
+    return items.filter(item =>
       item.name.toLowerCase().includes(toLowerFilter)
     );
   };
-  console.log('findContact', findContact());
 
   return (
     <List>
       {findContact().length === 0 ? (
         <p>You don't have any contact</p>
       ) : (
-        findContact().map(({ id, name, number }) => (
+        findContact().map(({ id, name, phone }) => (
           <ListItem key={id}>
             <span>
-              {name}: {number}
+              {name}: {phone}
             </span>
             <ButtonDelete onClick={() => dispatch(deleteContact(id))}>
               ❌
