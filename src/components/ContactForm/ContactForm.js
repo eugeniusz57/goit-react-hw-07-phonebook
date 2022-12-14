@@ -8,6 +8,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts } from 'redux/selectors';
 import { addContact } from 'redux/operations';
+import { toast } from 'react-toastify';
 
 export function ContactForm() {
   const [name, setName] = useState('');
@@ -41,9 +42,12 @@ export function ContactForm() {
           contact.phone === phone
       )
     ) {
-      return alert(`${name} or phone: ${phone} is alredy in contact`);
+      return toast.info(`${name} or phone:${phone} is alredy in contact`, {
+        autoClose: 3000,
+      });
     }
     dispatch(addContact({ name, phone }));
+    toast.success(`Contact ${name} created!`);
     clear();
   };
 

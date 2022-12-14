@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from 'redux/operations';
 import { getContacts, getStatusFilter } from 'redux/selectors';
-
+import { toast } from 'react-toastify';
 import { ButtonDelete, List, ListItem } from './ContactList.styled';
 
 export const ContactList = () => {
@@ -31,7 +31,12 @@ export const ContactList = () => {
             <span>
               {name}: {phone}
             </span>
-            <ButtonDelete onClick={() => dispatch(deleteContact(id))}>
+            <ButtonDelete
+              onClick={() => {
+                dispatch(deleteContact(id));
+                toast.success(`Contact deleted!`);
+              }}
+            >
               ❌
             </ButtonDelete>
           </ListItem>

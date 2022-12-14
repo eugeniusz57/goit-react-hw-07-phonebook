@@ -6,6 +6,8 @@ import { ContactList } from './ContactList/ContactList ';
 import { useDispatch } from 'react-redux';
 import { fetchContacts } from 'redux/operations';
 import { useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -19,6 +21,7 @@ export const App = () => {
       <TitleSeccond>Contacts</TitleSeccond>
       <Filter />
       <ContactList />
+      <ToastContainer autoClose={2000} />
     </Container>
   );
 };
