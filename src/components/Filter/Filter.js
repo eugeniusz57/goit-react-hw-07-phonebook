@@ -5,11 +5,11 @@ import {
 } from 'components/ContactForm/ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { setfilter } from 'redux/filterSlice';
-import { getStatusFilter } from 'redux/selectors';
+import { selectStatusFilter } from 'redux/selectors';
 
 export const Filter = () => {
   const dispatch = useDispatch();
-  const filter = useSelector(getStatusFilter);
+  const filter = useSelector(selectStatusFilter);
   console.log('filter', filter);
   const handleFilterChange = e => {
     dispatch(setfilter(e.target.value));

@@ -6,14 +6,14 @@ import {
   ButtonSubmit,
 } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from 'redux/selectors';
+import { selectContacts } from 'redux/selectors';
 import { addContact } from 'redux/operations';
 import { toast } from 'react-toastify';
 
 export function ContactForm() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const { items } = useSelector(getContacts);
+  const { items } = useSelector(selectContacts);
   const dispatch = useDispatch();
   console.log('contactItems', items);
 

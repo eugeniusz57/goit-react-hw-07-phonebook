@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export const App = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
@@ -20,7 +21,8 @@ export const App = () => {
       <ContactForm />
       <TitleSeccond>Contacts</TitleSeccond>
       <Filter />
-      <ContactList />
+
+      {<ContactList />}
       <ToastContainer autoClose={2000} />
     </Container>
   );
